@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <title>Adaptação</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v3.12.3/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-animation-component@3.2.1/dist/aframe-animation-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-text-geometry-component@^0.5.0/dist/aframe-text-geometry-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+
+        <!-- Tutorial sources -->
+        <img id="tutorial_back" src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Foffice-background.jpg?v=1563908277286" />
+        <img id="btn_home" src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Fcheck.png?v=1569881602535" />
+        
+        <video
+          id="tutorial_sound"
+          playsinline
+          webkit-playsinline
+          preload="auto"
+          crossorigin="anonymous"
+          src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Ftutorial_back-720.mp4?v=1571140901973"
+        ></video>
+        
+        <img id="look_around" src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Flook-around.png?v=1571074979400" />
+        <img id="close_simulation" src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Fclose-simulation.png?v=1571084959798" />
+        <img id="time_counter" src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Ftime-counter.png?v=1571086257884" />
+        <img id="target_interview" src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Ftarget-interivew.png?v=1571084959710" />
+        <img id="tip_example" src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Ftip-example.png?v=1571085369012" /> 
+      
+      </a-assets>
+
+      <a-camera camera="userHeight: 1.6" look-controls cursor="rayOrigin: mouse" >
+        <a-cursor
+          fuse="true"
+          fuse-timeout="3000"
+          color="#72bcd4"
+          geometry="primitive: ring; radiusInner: 0.04; radiusOuter: 0.07;"
+          raycaster="objects: .btn"
+        >
+        </a-cursor>
+      </a-camera>
+
+      <!--<a-sky src="#tutorial_back" color="#333333" material="side: double"
+        animation__fade="property: components.material.material.color; type: color; from: #FFF; to: #000; dur: 300; startEvents: fade"
+        animation__fadeback="property: components.material.material.color; type: color; from: #000; to: #FFF; dur: 300; startEvents: animationcomplete__fade">
+      </a-sky>-->
+      
+      <!-- Video da simulação  -->
+      <a-videosphere
+        id="tutorial_background"
+        visible="true"
+        rotation="0 3.321 0"
+        src="#tutorial_sound"
+        play-on-vrdisplayactivate-or-enter-vr
+        color="#333333" material="side: double"
+        animation__fade="property: components.material.material.color; type: color; from: #FFF; to: #000; dur: 300; startEvents: fade"
+        animation__fadeback="property: components.material.material.color; type: color; from: #000; to: #FFF; dur: 300; startEvents: animationcomplete__fade"
+      >
+      </a-videosphere>
+      
+      <a-plane class="close_simulation" src="#close_simulation" position="1.578 3.321 -10.64"  scale="7 7 7" visible="true" rotation="0 -12 0">
+      </a-plane>
+      
+      <a-plane id="look-center" src="#look_around" position="1.475 -2.17 -10.35"  scale="6 3 5" visible="true" rotation="0 -12 0">
+      </a-plane>  
+      
+      <a-plane class="target_interview" src="#time_counter" position="-9.54 3.092 -1.521"  scale="7 7 7" visible="true" rotation="0 90.26 0">
+      </a-plane>
+      
+      <a-plane id="look-left" src="#look_around" position="-9.54 -2.17 -1.521"  scale="6 3 5" visible="true" rotation="0 90.26 0">
+      </a-plane>  
+      
+      <a-plane class="target_interview" src="#target_interview" position="9.54 3.092 1.521"  scale="7 7 7" visible="true" rotation="0 -100.26 0">
+      </a-plane>
+      
+      <a-plane id="look-right" src="#look_around" position="9.54 -2.17 1.521"  scale="6 3 5" visible="true" rotation="0 -100.26 0">
+      </a-plane>  
+      
+      <a-plane class="target_interview" src="#tip_example" position="-1.22 3.321 10.64"  scale="7 7 7" visible="true" rotation="0 -180.26 0">
+      </a-plane>
+      
+      <a-plane id="look-back" src="#look_around" position="-1.11 -2.17 10.35"  scale="6 3 5" visible="true" rotation="0 -180.26 0">
+      </a-plane>  
+      
+      <!-- Buttom to back home -->
+      <a-plane src="#btn_home" class="btn" simple-link="href: index.html;" position="6.999 6.289 -10.64 " scale="2 2 2" rotation="0 -10 0" visible="false">
+        <a-animation attribute="visible" begin="300" to="true"></a-animation>
+      </a-plane>
+      
+      <!--<a-entity id="river" 
+          position="-2.15 1.720 -6.923" sound="src: url(https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Foffice-sound.mp3?v=1571093740184); autoplay: true; loop: true"
+                  ></a-entity>-->
+      
+    </a-scene>
+
+    <script src="js/script.js"></script>
+    <script src="js/play-on-vrdisplayactivate-or-enter-vr.js"></script>
+    <script src="js/timer-component.js"></script>
+    <script src="js/simple-link.js"></script>
+
+    <script src="https://unpkg.com/aframe-event-set-component@5/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-layout-component@5.3.0/dist/aframe-layout-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-template-component@3.2.1/dist/aframe-template-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-proxy-event-component@2.1.0/dist/aframe-proxy-event-component.min.js"></script>
+  </body>
+</html>

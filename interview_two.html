@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <title>Entrevista 2</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v3.12.3/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-animation-component@3.2.1/dist/aframe-animation-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-text-geometry-component@^0.5.0/dist/aframe-text-geometry-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene score-counter>
+      <a-assets>
+        <a-asset-item
+          id="optimerBoldFont"
+          src="https://rawgit.com/mrdoob/three.js/dev/examples/fonts/optimer_bold.typeface.json"
+        ></a-asset-item>
+
+        <!-- Interview One Sources -->
+        <video
+          id="interview2_video"
+          playsinline
+          webkit-playsinline
+          preload="auto"
+          crossorigin="anonymous"
+          src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Fentrevista%20duo%20-%20timer%20least.mp4?v=1569882660668"
+        ></video>
+
+        <!-- Buttons -->
+        <img
+          id="btn_home"
+          src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Fcheck.png?v=1569881602535"
+        />
+
+        <!-- Tips -->
+        <img
+          id="reminder-tip"
+          src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Freminder-tip.png?v=1568841983625"
+        />
+
+        <img
+          id="target_focus"
+          src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Ffocus-target.png?v=1568845540514"
+        />
+
+      </a-assets>
+
+      <a-camera user-height="0" look-controls="pointerLockedEnabled: true">
+        <a-cursor
+          fuse="true"
+          fuse-timeout="1000"
+          color="#72bcd4"
+          geometry="primitive: ring; radiusInner: 0.04; radiusOuter: 0.07"
+          event-set__mouseenter="_event: mouseenter; visible: false"
+          event-set__mouseleave="_event: mouseleave; visible: true"
+          raycaster="objects: .focus, .btn"
+        >
+        </a-cursor>
+
+        <a-entity
+          id="msg"
+          position="0 -0.3 -1.5"
+          text="align:center; 
+                width: 5;
+                wrapCount:100;
+                color: orange;"
+          hide-once-playing="#interview2_video"
+        >
+          <!--value: Clique na imagem no canto inferior direito para iniciar. Lembre-se das dicas!-->
+        </a-entity>
+      </a-camera>
+
+      <!-- Video simulation -->
+      <a-videosphere
+        id="interview2"
+        visible="true"
+        rotation="0 -100 0"
+        src="#interview2_video"
+        play-on-vrdisplayactivate-or-enter-vr
+      >
+      </a-videosphere>
+
+      <!-- Tip reminder -->
+      <a-image
+        class="tips"
+        position="5 -2.880 -25"
+        rotation="0 -10 0"
+        scale="23.579 15.194 5"
+        src="#reminder-tip"
+        visible="false"
+      >
+        <a-animation attribute="visible" begin="10000" to="true"></a-animation>
+        <a-animation
+          attribute="position"
+          begin="11500"
+          dur="40000"
+          from="5 -2.880 -25"
+          to="5 2000 -25"
+        ></a-animation>
+      </a-image>
+
+      <!-- Head tracking focus -->
+      <a-image
+        class="focus"
+        id="target"
+        position="5 20000 -25"
+        rotation="0 -10 0"
+        scale="29.284 25.284 10"
+        src="#target_focus"
+        event-set__enter="_event: mouseenter; visible: false"
+        event-set__leave="_event: mouseleave; visible: true"
+        invisible-once-pause="#interview2_video"
+      >
+        <a-animation attribute="position" begin="25000" from="5 20000 -25" to="5 -2.880 -25"></a-animation>
+      </a-image>
+
+      <!-- Head tracking focus score -->
+      <a-plane
+        id="score"
+        text="value: Score: 0; align: center"
+        position="5 -2.880 -25"
+        scale="25 25 25"
+        color="#24a0fe"
+        rotation="0 -10 0"
+        visible="false"
+        hide-once-playing="#interview2_video"
+      >
+      </a-plane>
+
+      <!-- Buttom to back home -->
+      <a-plane
+        src="#btn_home"
+        class="btn"
+        simple-link="href: index.html;"
+        position="12.657 11.146 -23.510"
+        scale="5 5 5"
+        rotation="0 -10 0"
+        visible="false"
+        hide-once-playing="#interview2_video"
+      >
+      </a-plane>
+  
+    </a-scene>
+
+    <!--<script src="js/script.js"></script>-->
+    <script src="js/play-on-vrdisplayactivate-or-enter-vr.js"></script>
+    <script src="js/hide-once-playing.js"></script>
+    <script src="js/invisible-once-pause.js"></script>
+    <script src="js/score-counter.js"></script>
+    <script src="js/simple-link.js"></script>
+
+    <script src="https://unpkg.com/aframe-event-set-component@5/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-layout-component@5.3.0/dist/aframe-layout-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-template-component@3.2.1/dist/aframe-template-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-proxy-event-component@2.1.0/dist/aframe-proxy-event-component.min.js"></script>
+  </body>
+</html>

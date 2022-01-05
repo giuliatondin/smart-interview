@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <title>Sala de espera</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v3.12.3/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-animation-component@3.2.1/dist/aframe-animation-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <!-- timeout="10000" -->
+
+        <!-- Waiting room sources -->
+        <video
+          id="waiting_room-video"
+          playsinline
+          webkit-playsinline
+          preload="auto"
+          crossorigin="anonymous"
+          src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Fwaiting-room.mp4?v=1568769578707"
+        ></video>
+        <img
+          id="tip-1"
+          src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Ftip-1.png?v=1568838681420"
+        />
+        <img
+          id="tip-2"
+          src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Ftip-2.png?v=1568838681420"
+        />
+        <img
+          id="tip-3"
+          src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Ftip-3.png?v=1568838681420"
+        />
+        <img
+          id="tip-4"
+          src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Ftip-4.png?v=1568838681420"
+        />
+        <img
+          id="tip-5"
+          src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Ftip-5.png?v=1568838681420"
+        />
+        <!--<img
+          id="tip-6"
+          src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Ftip-6.png?v=1568838681420"
+        />-->
+
+        <img
+          id="btn_home"
+          src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Fcheck.png?v=1569881602535"
+        />
+      </a-assets>
+
+      <a-camera user-height="0" look-controls="pointerLockedEnabled: true">
+        <a-cursor
+          fuse="true"
+          fuse-timeout="5000"
+          color="#72bcd4"
+          geometry="primitive: ring; radiusInner: 0.04; radiusOuter: 0.07"
+          raycaster="objects: .btn"
+          hide-once-playing="#waiting_room-video"
+        >
+        </a-cursor>
+
+        <a-entity
+          id="msg"
+          position="0 -0.3 -1.5"
+          text="align:center; 
+                width: 5;
+                wrapCount:100;
+                color: #72bcd4;"
+          hide-once-playing="#waiting_room-video"
+        >
+          <!--value: Clique na imagem no canto inferior direito para iniciar. Lembre-se das dicas!-->
+        </a-entity>
+      </a-camera>
+
+      <!-- Video da simulação  -->
+      <a-videosphere
+        id="waiting_room"
+        visible="true"
+        rotation="0 -100 0"
+        src="#waiting_room-video"
+        play-on-vrdisplayactivate-or-enter-vr
+      >
+      </a-videosphere>
+
+      <!-- Dicas para entrevista-->
+      <a-image
+        class="tips"
+        position="-0.699 -2.880 -25"
+        rotation="0 -2.120 0"
+        scale="23.579 15.194 5"
+        src="#tip-1"
+        visible="false"
+      >
+        <a-animation attribute="visible" begin="100000" to="true"></a-animation>
+        <a-animation
+          attribute="position"
+          begin="110000"
+          dur="30000"
+          from="-0.699 -2.880 -25"
+          to="-0.699 2000 -25"
+        ></a-animation>
+      </a-image>
+
+      <a-image
+        class="tips"
+        position="-0.699 -2.880 -25"
+        rotation="0 -2.120 0"
+        scale="23.579 15.194 5"
+        src="#tip-2"
+        visible="false"
+      >
+        <a-animation attribute="visible" begin="115000" to="true"></a-animation>
+        <a-animation
+          attribute="position"
+          begin="125000"
+          dur="30000"
+          from="-0.699 -2.880 -25"
+          to="-0.699 2000 -25"
+        ></a-animation>
+      </a-image>
+
+      <a-image
+        class="tips"
+        position="-0.699 -2.880 -25"
+        rotation="0 -2.120 0"
+        scale="23.579 15.194 5"
+        src="#tip-3"
+        visible="false"
+      >
+        <a-animation attribute="visible" begin="130000" to="true"></a-animation>
+        <a-animation
+          attribute="position"
+          begin="140000"
+          dur="30000"
+          from="-0.699 -2.880 -25"
+          to="-0.699 2000 -25"
+        ></a-animation>
+      </a-image>
+
+      <a-image
+        class="tips"
+        position="-0.699 -2.880 -25"
+        rotation="0 -2.120 0"
+        scale="23.579 15.194 5"
+        src="#tip-4"
+        visible="false"
+      >
+        <a-animation attribute="visible" begin="145000" to="true"></a-animation>
+        <a-animation
+          attribute="position"
+          begin="155000"
+          dur="30000"
+          from="-0.699 -2.880 -25"
+          to="-0.699 2000 -25"
+        ></a-animation>
+      </a-image>
+
+      <a-image
+        class="tips"
+        position="-0.699 -2.880 -25"
+        rotation="0 -2.120 0"
+        scale="23.579 15.194 5"
+        src="#tip-5"
+        visible="false"
+      >
+        <a-animation attribute="visible" begin="160000" to="true"></a-animation>
+        <a-animation
+          attribute="position"
+          begin="170000"
+          dur="30000"
+          from="-0.699 -2.880 -25"
+          to="-0.699 2000 -25"
+        ></a-animation>
+      </a-image>
+
+      <!-- Buttom to back home -->
+      <a-plane
+        src="#btn_home"
+        class="btn"
+        simple-link="href: index.html;"
+        position="12.657 11.146 -23.510"
+        scale="5 5 5"
+        rotation="0 -10 0"
+        visible="false"
+        hide-once-playing="#waiting_room-video"
+      >
+      </a-plane>
+    </a-scene>
+
+    <!--<script src="js/script.js"></script>-->
+    <script src="js/play-on-vrdisplayactivate-or-enter-vr.js"></script>
+    <script src="js/hide-once-playing.js"></script>
+    <script src="js/invisible-once-pause.js"></script>
+    <script src="js/simple-link.js"></script>
+
+    <script src="https://unpkg.com/aframe-event-set-component@5/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-layout-component@5.3.0/dist/aframe-layout-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-template-component@3.2.1/dist/aframe-template-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-proxy-event-component@2.1.0/dist/aframe-proxy-event-component.min.js"></script>
+  </body>
+</html>

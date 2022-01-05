@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <title>Quiz</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v3.12.3/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-animation-component@3.2.1/dist/aframe-animation-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-text-geometry-component@^0.5.0/dist/aframe-text-geometry-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene vr-mode-ui="enabled: false">
+      <a-assets>
+
+        <!-- Quiz Sources -->
+        <img id="quiz_background" src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Foffice-background.jpg?v=1563908277286" />
+        
+        <img id="quiz_opening-img" src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Fquiz-opening.png?v=1569446429130" />
+
+        <img id="btn_home" src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Fcheck.png?v=1569881602535" />
+
+        <!-- First Question Sources -->
+        <img id="option_1-img" src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Foption-1.png?v=1569445149966" />
+        <img id="option_2-img" src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Foption-2.png?v=1569445394752" />   
+        <img id="option_3-img" src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Foption-3.png?v=1569445403187" />
+        
+        <!-- Smile question -->
+        <img id="smile_q1" src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Fsorriso_q1.png?v=1570655757522" />
+        <img id="smile_q2" src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Fsorriso_q2.png?v=1570655762586" />   
+        <img id="smile_q3" src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Fsorriso_q3.png?v=1570655767962" />
+        
+        <!-- Hands question -->
+        <img id="hands_q1" src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Fmaos_q1.png?v=1570655733699" />
+        <img id="hands_q2" src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Fmaos_q2.png?v=1570655736083" />   
+        <img id="hands_q3" src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Fmaos_q3.png?v=1570655738088" />
+      
+        <!-- Head movement question -->
+        <img id="head_q1" src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Fsinais_q1.png?v=1570655745564" />
+        <img id="head_q2" src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Fsinais_q2.png?v=1570655748932" />   
+        <img id="head_q3" src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Fsinais_q3.png?v=1570655752544" />
+        
+        <!-- Habit question -->
+        <img id="habit_q1" src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Ftiques_q1.png?v=1570655791017" />
+        <img id="habit_q2" src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Ftiques_q2.png?v=1570655791017" />   
+        <img id="habit_q3" src="https://cdn.glitch.com/89dc2910-3480-4198-b1cf-82fc7dc69b26%2Ftiques_q3.png?v=1570655791215" />
+        
+      </a-assets>
+
+      <a-camera
+        camera="userHeight: 1.6" look-controls cursor="rayOrigin: mouse"
+      >
+        <!--<a-cursor
+          fuse="true"
+          fuse-timeout="2000"
+          color="#72bcd4"
+          geometry="primitive: ring; radiusInner: 0.04; radiusOuter: 0.07"
+          event-set__mouseenter="_event: mouseenter; material.color: #77DD77"
+          event-set__mouseleave="_event: mouseleave; material.color: #72bcd4"
+          raycaster="objects: .options, .btn"
+        >
+          <a-animation
+            begin="click"
+            easing="ease-in"
+            attribute="scale"
+            fill="backwards"
+            from="0.1 0.1 0.1"
+            to="1 1 1"
+            dur="150"
+          ></a-animation>
+        </a-cursor>-->
+      </a-camera>
+
+      <a-sky src="#quiz_background" color="#333333" material="side: double"
+        animation__fade="property: components.material.material.color; type: color; from: #FFF; to: #000; dur: 300; startEvents: fade"
+        animation__fadeback="property: components.material.material.color; type: color; from: #000; to: #FFF; dur: 300; startEvents: animationcomplete__fade">
+      </a-sky>
+
+      <a-plane src="#quiz_opening-img" position="1.270 1.933 -7.052" rotation="0.0 -10 0.0" scale="7 7 7">
+        <a-animation attribute="visible" begin="10000" to="false"></a-animation>
+        <a-animation
+          attribute="position"
+          begin="30000"
+          dur="100"
+          from="1.501 3.278 -7.052"
+          to="1.501 20000 -7.052"
+        ></a-animation>
+      </a-plane>
+
+      <!-- Start of question 1 -->
+      <a-plane id="#op1" src="#smile_q1" color="#E8E8E8" height="2" width="2" position="1.501 2000 -7.052" scale="3.868 0.750 1000" 
+               rotation="0.0 -10 0.0" visible="false" event-set__mouseleave="_event: mouseleave; material.color: #E8E8E8">
+        
+        <a-animation attribute="material.color" from="#E8E8E8" to="#ff3232" dur="100" begin="click"></a-animation>
+        
+        <a-animation attribute="visible" begin="10000" to="true"></a-animation>
+        <a-animation attribute="position" begin="10000" dur="100" from="1.501 2000 -7.052" to="1.501 5.182 -7.052"></a-animation>
+        <a-animation attribute="visible" begin="30000" to="false"></a-animation>
+        <a-animation attribute="position" begin="30000" dur="100" from="1.501 5.182 -7.052" to="1.501 2000 -7.052"></a-animation>
+      </a-plane>
+
+      <a-plane id="#op2" src="#smile_q2" color="#E8E8E8" height="2" width="2" position="1.501 2000 -7.052" scale="3.868 0.750 1000" 
+               rotation="0.0 -10 0.0" visible="false" event-set__mouseleave="_event: mouseleave; material.color: #E8E8E8">
+        
+        <a-animation attribute="material.color" from="#E8E8E8" to="#66ff66" dur="300" begin="click"></a-animation>
+
+        <a-animation attribute="visible" begin="10000" to="true"></a-animation>
+        <a-animation attribute="position" begin="10000" dur="100" from="1.501 2000 -7.052" to="1.501 3.278 -7.052"></a-animation>
+        <a-animation attribute="visible" begin="30000" to="false"></a-animation>
+        <a-animation attribute="position" begin="30000" dur="100" from="1.501 3.278 -7.052" to="1.501 2000 -7.052"></a-animation>
+      </a-plane>
+      
+      <a-plane class="options" src="#smile_q3" color="#E8E8E8" height="2" width="2" position="1.501 2000 -7.052" scale="3.868 0.750 1000" 
+               rotation="0.0 -10 0.0" visible="false" event-set__mouseleave="_event: mouseleave; material.color: #E8E8E8">
+        
+        <a-animation attribute="material.color" from="#E8E8E8" to="#ff3232" dur="300" begin="click"></a-animation>
+        
+        <a-animation attribute="visible" begin="10000" to="true"></a-animation>
+        <a-animation attribute="position" begin="10000" dur="100" from="1.501 2000 -7.052" to="1.501 1.396 -7.052"></a-animation>
+        <a-animation attribute="visible" begin="30000" to="false"></a-animation>
+        <a-animation attribute="position" begin="30000" dur="100" from="1.501 1.396 -7.052" to="1.501 2000 -7.052"></a-animation>
+      </a-plane>
+      
+      <!-- Start of question 2 -->
+      <a-plane class="options" src="#head_q1" color="#E8E8E8" height="2" width="2" position="1.501 2000 -7.052" scale="3.868 0.750 1000" 
+               rotation="0.0 -10 0.0" visible="false" event-set__mouseleave="_event: mouseleave; material.color: #E8E8E8">
+        
+        <a-animation attribute="material.color" from="#E8E8E8" to="#66ff66" dur="300" begin="click"></a-animation>
+        
+        <a-animation attribute="visible" begin="31000" to="true"></a-animation>
+        <a-animation attribute="position" begin="31000" dur="100" from="1.501 2000 -7.052" to="1.501 5.182 -7.052"></a-animation>
+        <a-animation attribute="visible" begin="51000" to="false"></a-animation>
+        <a-animation attribute="position" begin="51000" dur="100" from="1.501 5.182 -7.052" to="1.501 2000 -7.052"></a-animation>
+      </a-plane>
+      
+      <a-plane class="options" src="#head_q2" color="#E8E8E8" height="2" width="2" position="1.501 2000 -7.052" scale="3.868 0.750 1000" 
+               rotation="0.0 -10 0.0" event-set__mouseleave="_event: mouseleave; material.color: #E8E8E8" visible="false">
+        
+        <a-animation attribute="material.color" from="#E8E8E8" to="#ff3232" dur="300" begin="click"></a-animation>
+
+        <a-animation attribute="visible" begin="31000" to="true"></a-animation>
+        <a-animation attribute="position" begin="31000" dur="100" from="1.501 2000 -7.052" to="1.501 3.278 -7.052"></a-animation>
+        <a-animation attribute="visible" begin="51000" to="false"></a-animation>
+        <a-animation attribute="position" begin="51000" dur="100" from="1.501 3.278 -7.052" to="1.501 2000 -7.052"></a-animation>
+      </a-plane>
+      
+      <a-plane class="options" src="#head_q3" color="#E8E8E8" height="2" width="2" position="1.501 2000 -7.052" scale="3.868 0.750 1000" 
+               rotation="0.0 -10 0.0" visible="false" event-set__mouseleave="_event: mouseleave; material.color: #E8E8E8">
+        
+        <a-animation attribute="material.color" from="#E8E8E8" to="#ff3232" dur="300" begin="click"></a-animation>
+        
+        <a-animation attribute="visible" begin="31000" to="true"></a-animation>
+        <a-animation attribute="position" begin="31000" dur="100" from="1.501 2000 -7.052" to="1.501 1.396 -7.052"></a-animation>
+        <a-animation attribute="visible" begin="51000" to="false"></a-animation>
+        <a-animation attribute="position" begin="51000" dur="100" from="1.501 1.396 -7.052" to="1.501 2000 -7.052"></a-animation>
+      </a-plane>
+      
+      <!-- Start of question 3 -->
+      <a-plane class="options" src="#habit_q1" color="#E8E8E8" height="2" width="2" position="1.501 2000 -7.052" scale="3.868 0.750 1000" 
+               rotation="0.0 -10 0.0" visible="false" event-set__mouseleave="_event: mouseleave; material.color: #E8E8E8">
+        
+        <a-animation attribute="material.color" from="#E8E8E8" to="#ff3232" dur="300" begin="click"></a-animation>
+        
+        <a-animation attribute="visible" begin="52000" to="true"></a-animation>
+        <a-animation attribute="position" begin="52000" dur="100" from="1.501 2000 -7.052" to="1.501 5.182 -7.052"></a-animation>
+        <a-animation attribute="visible" begin="72000" to="false"></a-animation>
+        <a-animation attribute="position" begin="72000" dur="100" from="1.501 5.182 -7.052" to="1.501 2000 -7.052"></a-animation>
+      </a-plane>
+
+      <a-plane class="options" src="#habit_q2" color="#E8E8E8" height="2" width="2" position="1.501 2000 -7.052" scale="3.868 0.750 1000" 
+               rotation="0.0 -10 0.0" event-set__mouseleave="_event: mouseleave; material.color: #E8E8E8" visible="false">
+        
+        <a-animation attribute="material.color" from="#E8E8E8" to="#66ff66" dur="300" begin="click"></a-animation>
+
+        <a-animation attribute="visible" begin="52000" to="true"></a-animation>
+        <a-animation attribute="position" begin="52000" dur="100" from="1.501 2000 -7.052" to="1.501 3.278 -7.052"></a-animation>
+        <a-animation attribute="visible" begin="72000" to="false"></a-animation>
+        <a-animation attribute="position" begin="72000" dur="100" from="1.501 3.278 -7.052" to="1.501 2000 -7.052"></a-animation>
+      </a-plane>
+      
+      <a-plane class="options" src="#habit_q3" color="#E8E8E8" height="2" width="2" position="1.501 2000 -7.052" scale="3.868 0.750 1000" 
+               rotation="0.0 -10 0.0" visible="false" event-set__mouseleave="_event: mouseleave; material.color: #E8E8E8">
+        
+        <a-animation attribute="material.color" from="#E8E8E8" to="#ff3232" dur="300" begin="click"></a-animation>
+        
+        <a-animation attribute="visible" begin="52000" to="true"></a-animation>
+        <a-animation attribute="position" begin="52000" dur="100" from="1.501 2000 -7.052" to="1.501 1.396 -7.052"></a-animation>
+        <a-animation attribute="visible" begin="72000" to="false"></a-animation>
+        <a-animation attribute="position" begin="72000" dur="100" from="1.501 1.396 -7.052" to="1.501 2000 -7.052"></a-animation>
+      </a-plane>
+      
+      <!-- Start of question 4 -->
+      <a-plane class="options" src="#hands_q1" color="#E8E8E8" height="2" width="2" position="1.501 2000 -7.052" scale="3.868 0.750 1000" 
+               rotation="0.0 -10 0.0" visible="false" event-set__mouseleave="_event: mouseleave; material.color: #E8E8E8">
+        
+        <a-animation attribute="material.color" from="#E8E8E8" to="#ff3232" dur="300" begin="click"></a-animation>
+        
+        <a-animation attribute="visible" begin="73000" to="true"></a-animation>
+        <a-animation attribute="position" begin="73000" dur="100" from="1.501 2000 -7.052" to="1.501 5.182 -7.052"></a-animation>
+        <a-animation attribute="visible" begin="93000" to="false"></a-animation>
+        <a-animation attribute="position" begin="93000" dur="100" from="1.501 5.182 -7.052" to="1.501 2000 -7.052"></a-animation>
+      </a-plane>
+
+      <a-plane class="options" src="#hands_q3" color="#E8E8E8" height="2" width="2" position="1.501 2000 -7.052" scale="3.868 0.750 1000" 
+               rotation="0.0 -10 0.0" event-set__mouseleave="_event: mouseleave; material.color: #E8E8E8" visible="false">
+        
+        <a-animation attribute="material.color" from="#E8E8E8" to="#ff3232" dur="300" begin="click"></a-animation>
+
+        <a-animation attribute="visible" begin="73000" to="true"></a-animation>
+        <a-animation attribute="position" begin="73000" dur="100" from="1.501 2000 -7.052" to="1.501 3.278 -7.052"></a-animation>
+        <a-animation attribute="visible" begin="93000" to="false"></a-animation>
+        <a-animation attribute="position" begin="93000" dur="100" from="1.501 3.278 -7.052" to="1.501 2000 -7.052"></a-animation>
+      </a-plane>
+      
+       <a-plane class="options" src="#hands_q2" color="#E8E8E8" height="2" width="2" position="1.501 2000 -7.052" scale="3.868 0.750 1000" 
+               rotation="0.0 -10 0.0" visible="false" event-set__mouseleave="_event: mouseleave; material.color: #E8E8E8">
+        
+        <a-animation attribute="material.color" from="#E8E8E8" to="#66ff66" dur="300" begin="click"></a-animation>
+        
+        <a-animation attribute="visible" begin="73000" to="true"></a-animation>
+        <a-animation attribute="position" begin="73000" dur="100" from="1.501 2000 -7.052" to="1.501 1.396 -7.052"></a-animation>
+        <a-animation attribute="visible" begin="93000" to="false"></a-animation>
+        <a-animation attribute="position" begin="93000" dur="100" from="1.501 1.396 -7.052" to="1.501 2000 -7.052"></a-animation>
+      </a-plane>
+      
+      <!-- Start of question 5 -->
+      <a-plane class="options" src="#option_3-img" color="#E8E8E8" height="2" width="2" position="1.501 2000 -7.052" scale="3.868 0.750 1000" 
+               rotation="0.0 -10 0.0" visible="false" event-set__mouseleave="_event: mouseleave; material.color: #E8E8E8">
+        
+        <a-animation attribute="material.color" from="#E8E8E8" to="#66ff66" dur="300" begin="click"></a-animation>
+        
+        <a-animation attribute="visible" begin="94000" to="true"></a-animation>
+        <a-animation attribute="position" begin="94000" dur="100" from="1.501 2000 -7.052" to="1.501 5.182 -7.052"></a-animation>
+        <a-animation attribute="visible" begin="110400" to="false"></a-animation>
+        <a-animation attribute="position" begin="110400" dur="100" from="1.501 5.182 -7.052" to="1.501 2000 -7.052"></a-animation>
+      </a-plane>
+
+      <a-plane class="options" src="#option_2-img" color="#E8E8E8" height="2" width="2" position="1.501 2000 -7.052" scale="3.868 0.750 1000" 
+               rotation="0.0 -10 0.0" event-set__mouseleave="_event: mouseleave; material.color: #E8E8E8" visible="false">
+        
+        <a-animation attribute="material.color" from="#E8E8E8" to="#ff3232" dur="300" begin="click"></a-animation>
+
+        <a-animation attribute="visible" begin="94000" to="true"></a-animation>
+        <a-animation attribute="position" begin="94000" dur="100" from="1.501 2000 -7.052" to="1.501 3.278 -7.052"></a-animation>
+        <a-animation attribute="visible" begin="110400" to="false"></a-animation>
+        <a-animation attribute="position" begin="110400" dur="100" from="1.501 3.278 -7.052" to="1.501 2000 -7.052"></a-animation>
+      </a-plane>
+      
+       <a-plane class="options" src="#option_1-img" color="#E8E8E8" height="2" width="2" position="1.501 2000 -7.052" scale="3.868 0.750 1000" 
+               rotation="0.0 -10 0.0" visible="false" event-set__mouseleave="_event: mouseleave; material.color: #E8E8E8">
+        
+        <a-animation attribute="material.color" from="#E8E8E8" to="#ff3232" dur="300" begin="click"></a-animation>
+        
+        <a-animation attribute="visible" begin="94000" to="true"></a-animation>
+        <a-animation attribute="position" begin="94000" dur="100" from="1.501 2000 -7.052" to="1.501 1.396 -7.052"></a-animation>
+        <a-animation attribute="visible" begin="110400" to="false"></a-animation>
+        <a-animation attribute="position" begin="110400" dur="100" from="1.501 1.396 -7.052" to="1.501 2000 -7.052"></a-animation>
+      </a-plane>
+      
+      <!-- Buttom to back home -->
+      <a-plane src="#btn_home" class="btn" simple-link="href: index.html;" position="6.999 -2.360 -10.64 " scale="3 3 3" rotation="0 -10 0" visible="false">
+        <a-animation attribute="visible" begin="300" to="true"></a-animation>
+      </a-plane>
+      
+    </a-scene>
+
+    <script src="js/script.js"></script>
+    <script src="js/play-on-vrdisplayactivate-or-enter-vr.js"></script>
+    <script src="js/timer-component.js"></script>
+    <script src="js/simple-link.js"></script>
+
+    <script src="https://unpkg.com/aframe-event-set-component@5/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-layout-component@5.3.0/dist/aframe-layout-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-template-component@3.2.1/dist/aframe-template-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-proxy-event-component@2.1.0/dist/aframe-proxy-event-component.min.js"></script>
+  </body>
+</html>
